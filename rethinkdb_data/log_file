@@ -1,0 +1,47 @@
+2025-04-07T11:38:03.110742850 0.013333s notice: Recursively removing directory /home/wuilmerj24/Proyectos/udemy/rust_01/tareas_api/rethinkdb_data/tmp
+2025-04-07T11:38:03.127780010 0.030366s notice: Initializing directory /home/wuilmerj24/Proyectos/udemy/rust_01/tareas_api/rethinkdb_data
+2025-04-07T11:38:03.128501348 0.031088s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/wuilmerj24/Proyectos/udemy/rust_01/tareas_api/rethinkdb_data' did not already exist or is empty.)
+2025-04-07T11:38:03.129354506 0.031941s notice: Running rethinkdb 2.4.4~0bookworm (x86_64-linux-gnu) (GCC 12.2.0)...
+2025-04-07T11:38:03.130744463 0.033331s notice: Running on Linux 6.12.20-amd64 x86_64
+2025-04-07T11:38:03.130774313 0.033361s notice: Loading data from directory /home/wuilmerj24/Proyectos/udemy/rust_01/tareas_api/rethinkdb_data
+2025-04-07T11:38:03.187439795 0.090026s info: Automatically using cache size of 13675 MB
+2025-04-07T11:38:03.191893494 0.094480s notice: Listening for intracluster connections on port 29015
+2025-04-07T11:38:03.199968725 0.102555s notice: Listening for client driver connections on port 28015
+2025-04-07T11:38:03.200010044 0.102596s notice: Listening for administrative HTTP connections on port 8080
+2025-04-07T11:38:03.200012524 0.102599s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2025-04-07T11:38:03.200014474 0.102601s notice: Listening on driver addresses: 127.0.0.1, ::1
+2025-04-07T11:38:03.200016874 0.102603s notice: Listening on http addresses: 127.0.0.1, ::1
+2025-04-07T11:38:03.200020264 0.102607s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2025-04-07T11:38:03.200022704 0.102609s notice: Server ready, "wuilmerj24_pc_rft" bf67bffe-e755-4122-be7c-86dfc45b79ad
+2025-04-07T17:23:59.547692307 20756.450279s info: Table d011cbac-ff99-4825-9cb8-c55c6f28a3e8: Starting a new Raft election for term 1.
+2025-04-07T17:23:59.549212283 20756.451799s info: Table d011cbac-ff99-4825-9cb8-c55c6f28a3e8: Added replica on this server.
+2025-04-07T17:23:59.556227954 20756.458814s info: Table d011cbac-ff99-4825-9cb8-c55c6f28a3e8: This server is Raft leader for term 1. Latest log index is 0.
+2025-04-07T17:24:06.523815552 20763.426402s info: Table 357e8e52-0814-4cfa-a3ea-f05a2d347689: Starting a new Raft election for term 1.
+2025-04-07T17:24:06.523879832 20763.426466s info: Table 357e8e52-0814-4cfa-a3ea-f05a2d347689: Added replica on this server.
+2025-04-07T17:24:06.528154491 20763.430741s info: Table 357e8e52-0814-4cfa-a3ea-f05a2d347689: This server is Raft leader for term 1. Latest log index is 0.
+2025-04-07T20:36:55.546274676 32332.448861s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2025-04-07T20:36:55.546365655 32332.448952s notice: Shutting down client connections...
+2025-04-07T20:36:55.546404245 32332.448990s notice: All client connections closed.
+2025-04-07T20:36:55.546405895 32332.448992s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2025-04-07T20:36:55.552148905 32332.454735s notice: Storage engine shut down.
+2025-04-08T11:47:01.149649352 0.017328s notice: Running rethinkdb 2.4.4~0bookworm (x86_64-linux-gnu) (GCC 12.2.0)...
+2025-04-08T11:47:01.151241935 0.018920s notice: Running on Linux 6.12.20-amd64 x86_64
+2025-04-08T11:47:01.151271485 0.018949s notice: Loading data from directory /home/wuilmerj24/Proyectos/udemy/rust_01/tareas_api/rethinkdb_data
+2025-04-08T11:47:01.176968177 0.044646s info: Automatically using cache size of 12302 MB
+2025-04-08T11:47:01.180961448 0.048639s notice: Listening for intracluster connections on port 29015
+2025-04-08T11:47:01.226293870 0.093972s notice: Listening for client driver connections on port 28015
+2025-04-08T11:47:01.226369889 0.094048s notice: Listening for administrative HTTP connections on port 8080
+2025-04-08T11:47:01.226370219 0.094048s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2025-04-08T11:47:01.226370489 0.094049s notice: Listening on driver addresses: 127.0.0.1, ::1
+2025-04-08T11:47:01.226373939 0.094052s notice: Listening on http addresses: 127.0.0.1, ::1
+2025-04-08T11:47:01.226374139 0.094052s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2025-04-08T11:47:01.226374389 0.094052s notice: Server ready, "wuilmerj24_pc_rft" bf67bffe-e755-4122-be7c-86dfc45b79ad
+2025-04-08T11:47:02.442213601 1.309892s info: Table 357e8e52-0814-4cfa-a3ea-f05a2d347689: Starting a new Raft election for term 2.
+2025-04-08T11:47:02.449144400 1.316822s info: Table 357e8e52-0814-4cfa-a3ea-f05a2d347689: This server is Raft leader for term 2. Latest log index is 2.
+2025-04-08T11:47:03.009201661 1.876880s info: Table d011cbac-ff99-4825-9cb8-c55c6f28a3e8: Starting a new Raft election for term 2.
+2025-04-08T11:47:03.014128538 1.881807s info: Table d011cbac-ff99-4825-9cb8-c55c6f28a3e8: This server is Raft leader for term 2. Latest log index is 2.
+2025-04-08T13:48:01.051069275 7259.918747s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2025-04-08T13:48:01.051187344 7259.918865s notice: Shutting down client connections...
+2025-04-08T13:48:01.051335393 7259.919013s notice: All client connections closed.
+2025-04-08T13:48:01.051339803 7259.919018s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2025-04-08T13:48:01.063029016 7259.930707s notice: Storage engine shut down.

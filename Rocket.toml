@@ -1,0 +1,18 @@
+[default]
+address = "127.0.0.1"
+port = 8000
+workers = 10
+max_blocking = 512
+keep_alive = 5
+ident = "Tareas api"
+ip_header = "X-Real-IP"
+temp_dir = "/tmp"
+cli_colors = true
+
+[debug]
+log_level = "debug"
+
+[release]
+log_level = "normal"
+
+
