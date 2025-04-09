@@ -78,7 +78,7 @@ Este WebSocket te permite recibir eventos cuando una tarea cambia o es creada.
 - **Rocket.rs** 🚀
 - **RethinkDB** 🔁
 - **JWT (jsonwebtoken)** 🔐
-- **WebSocket** (Rocket + Tokio) 📡
+- **WebSocket** (Rocket) 📡
 - **Swagger** con [`utoipa`] 📘
 
 ---

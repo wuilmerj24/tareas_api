@@ -18,71 +18,85 @@ use crate::{utils::Utils, ClientesSockets};
     tag = "websocket"
 )]
 #[get("/<token>")]
-pub async fn connect_ws(token:&str,ws:WebSocket,clients:&State<ClientesSockets>)->ws::Channel<'static>{
-    let clients:Arc<Mutex<HashMap<String,Sender<String>>>> = clients.inner().clone();
-    let config = Config{
-        max_message_size:Some(1024),
-        max_frame_size:Some(1024),
+pub async fn connect_ws(token: &str, ws: WebSocket, clients: &State<ClientesSockets>) -> ws::Channel<'static> {
+    let clientes: Arc<Mutex<HashMap<String, Sender<String>>>> = clients.inner().clone();
+    let config = Config {
+        max_message_size: Some(1024),
+        max_frame_size: Some(1024),
         ..Default::default()
     };
-    let user_id_random = Utils::generar_string(4);
-    println!("user_id_random {}",user_id_random.clone());
-    let ws = ws.config(config);
-    ws.channel(move |mut stream|{
-        Box::pin(async move{
-            let (tx,mut rx)=channel(100);
-            clients.lock().await.insert(user_id_random.clone().to_string(), tx.clone());
-            let count = clients.lock().await.len();
-            println!("connectes {}",count);
-            let mut stream = stream.fuse();
+    let key = b"1234afeb";
 
-            loop {
-                select! {
-                    msg =  stream.next() => {
-                        match msg {
-                            Some(Ok(msg))=>{
-                                if msg.is_text() || msg.is_binary() {
-                                    println!("mmsg reccibido {:?}",msg.to_text());
-                                }else if msg.is_close() {
-                                    println!("client close conn");
-                                    break;
+    match decode::<Claims>(token, &DecodingKey::from_secret(key), &Validation::default()) {
+        Ok(claims) => {
+            let id_usuario = claims.claims.sub;
+            let ws = ws.config(config);
+            ws.channel(move |mut stream| {
+                Box::pin(async move {
+                    let (tx, mut rx) = channel(100);
+                    clientes.lock().await.insert(id_usuario.clone().to_string(), tx.clone());
+                    let count = clientes.lock().await.len();
+                    println!("connectes {}", count);
+                    let mut stream = stream.fuse();
+
+                    loop {
+                        select! {
+                            msg = stream.next() => {
+                                match msg {
+                                    Some(Ok(msg)) => {
+                                        if msg.is_text() || msg.is_binary() {
+                                            println!("mmsg reccibido {:?}", msg.to_text());
+                                        } else if msg.is_close() {
+                                            println!("client close conn");
+                                            break;
+                                        }
+                                    },
+                                    Some(Err(e)) => {
+                                        println!("err msg client {:?}", e);
+                                        break;
+                                    },
+                                    None => {
+                                        println!("stream ended");
+                                        break;
+                                    }
                                 }
                             },
-                            Some(Err(e))=>{
-                                println!("err msg client {:?}",e);
-                                break;
-                            },
-                            None => {
-                                println!("stream ended");
-                                break;
-                            }                            
-                        }
-                    },
-                    broadcast_message = rx.recv().fuse() => {
-                        match broadcast_message {
-                            Ok(message)=>{
-                                println!("msg transmitido {}",message);
-                                if let Err(e) = stream.send(Message::Text(message)).await {
-                                    println!("error invalid message {:?}",e);
-                                    break;
+                            broadcast_message = rx.recv().fuse() => {
+                                match broadcast_message {
+                                    Ok(message) => {
+                                        println!("msg transmitido {}", message);
+                                        if let Err(e) = stream.send(Message::Text(message)).await {
+                                            println!("error invalid message {:?}", e);
+                                            break;
+                                        }
+                                    },
+                                    Err(RecvError::Closed) => {
+                                        println!("channel close");
+                                        break;
+                                    },
+                                    Err(RecvError::Lagged(n)) => {
+                                        println!("Recept lag {} msg", n);
+                                    }
                                 }
                             },
-                            Err(RecvError::Closed)=>{
-                                println!("channel close");
-                                break;
-                            },
-                            Err(RecvError::Lagged(n))=>{
-                                println!("Recept lag {} msg",n);
-                            }
-                            
-                        }
-                    },
-                }
-            }
-            clients.lock().await.remove(&user_id_random.clone().to_string());
-            let count = clients.lock().await.len();
-            println!("conn closed {} clients",count);
-            Ok(())
-        })
-    })
+                        }//select
+                    }//loop
+                    clientes.lock().await.remove(&id_usuario.clone().to_string());
+                    let count = clientes.lock().await.len();
+                    println!("conn closed {} clients", count);
+                    Ok(())
+                })//box pin
+            })//ws channel
+        },
+        Err(e) => {
+            println!("error connect ws {}", e);
+            // Retornamos un channel que inmediatamente cierra la conexión
+            ws.config(config).channel(move |stream| {
+                Box::pin(async move {
+                    println!("Closing connection due to invalid token");
+                    Ok(())
+                })
+            })
+        }
+    }
 }
